@@ -9,7 +9,7 @@ function clicks(val) {
             display = display.slice(0, -1);
             break;
         case "=":
-            display = eval(display.replaceAll("X", "*"));
+            display = eval(display);
             break;
         default:
             display += val;

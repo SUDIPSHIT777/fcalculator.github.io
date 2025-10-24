@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="icon" href="Image/d.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="CSS/style.css">
+    <script src="./src/CDN-TailwindCSS.js"></script>
+    <script src="JAVASCRIPT/calculator.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+
+<body class="bg-black flex flex-col w-screen h-screen p-2">
+    <div class="h-[40%]  text-white flex items-end justify-end p-4 text-[2rem] overflow-y-auto text-right scrols">
+        <div id="r-box"></div>
+    </div>
+
+    <div class="h-[55%] text-white">
+        <div class="rows flex justify-around items-center h-[20%] text-[1.5rem]">
+            <button class="text-red-700  rounded-[25px] border border-[#ccc]" onclick="clicks('Ac')"> Ac </button>
+            <button class=" rounded-[25px] border border-[#ccc]" onclick="clicks('%')"> % </button>
+            <button class=" rounded-[25px] border border-[#ccc]" onclick="clicks('del')">
+                <i class="fa-solid fa-delete-left mt-3"></i>
+            </button>
+            <button class=" rounded-[25px] border border-[#ccc]" onclick="clicks('/')"> / </button>
+        </div>
+        <div class="rows flex justify-around items-center  h-[20%]  text-[1.5rem]">
+            <button class=" rounded-[25px] border border-[#ccc]" onclick="clicks('8')"> 8 </button>
+            <button class=" rounded-[25px] border border-[#ccc]" onclick="clicks('9')"> 9 </button>
+            <button class=" rounded-[25px] border border-[#ccc]" onclick="clicks('7')"> 7 </button>
+            <button class=" rounded-[25px] border border-[#ccc]" onclick="clicks('*')"> * </button>
+        </div>
+        <div class="rows flex justify-around items-center  h-[20%]  text-[1.5rem]">
+            <button class=" rounded-[25px] border border-[#ccc]" onclick="clicks('4')"> 4 </button>
+            <button class=" rounded-[25px] border border-[#ccc]" onclick="clicks('5')"> 5 </button>
+            <button class=" rounded-[25px] border border-[#ccc]" onclick="clicks('6')"> 6 </button>
+            <button class=" rounded-[25px] border border-[#ccc] text-[3rem]" onclick="clicks('-')"> - </button>
+        </div>
+        <div class="rows flex justify-around items-center  h-[20%] text-[1.5rem]">
+            <button class=" rounded-[25px] border border-[#ccc]" onclick="clicks('1')"> 1 </button>
+            <button class=" rounded-[25px] border border-[#ccc]" onclick="clicks('2')"> 2 </button>
+            <button class=" rounded-[25px] border border-[#ccc]" onclick="clicks('3')"> 3 </button>
+            <button class=" rounded-[25px] border border-[#ccc]" onclick="clicks('+')"> + </button>
+        </div>
+        <div class="rows flex justify-around items-center  h-[20%] text-[1.5rem]">
+            <button class=" rounded-[25px] border border-[#ccc]" onclick="clicks('00')"> 00 </button>
+            <button class=" rounded-[25px] border border-[#ccc]" onclick="clicks('0')"> 0 </button>
+            <button class=" rounded-[25px] border border-[#ccc]" onclick="clicks('.')"> . </button>
+            <button class=" rounded-[25px] border border-[#ccc]" onclick="clicks('=')"> = </button>
+        </div>
+    </div </body>
+
+</html>

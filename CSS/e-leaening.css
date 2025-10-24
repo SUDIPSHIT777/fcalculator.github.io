@@ -1,0 +1,740 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+body,
+html {
+  overflow-x: hidden;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-y: hidden;
+}
+
+.navcontainer,
+.navbar {
+  position: relative;
+}
+
+.navcontainer {
+  width: 100vw;
+  height: 14vh;
+  background-color: white;
+}
+
+.navbar {
+  background-image: linear-gradient(to right, #8360c3, #2ebf91);
+  width: 90vw;
+  position: fixed;
+  border-radius: 30px 30px 30px 30px;
+  top: 0;
+  z-index: 9999;
+  margin-top: 1px;
+}
+
+.navcol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  gap: 10px;
+}
+
+.navcol:hover {
+  transform: translateY(-3px);
+  filter: drop-shadow(1px 2px 2px black);
+}
+
+.btn-gradient {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  padding: 0.75rem 2rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.5s ease;
+}
+
+.btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #764ba2, #667eea);
+}
+
+.btn-gradients {
+  color: #080808;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  padding: 0.75rem 2rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.5s ease;
+}
+
+.btn-gradients:hover {
+  transform: translateY(-2px);
+}
+
+/* Nucleus - Base */
+.loader {
+  --float: 5%;
+  --radius: 2rem;
+
+  background: linear-gradient(130deg, #df2201, #13d0f1);
+  border-radius: var(--radius);
+  height: var(--radius);
+  position: relative;
+  width: var(--radius);
+}
+
+/* Nucleus - Lighting */
+.loader::after {
+  --light-x: 30%;
+  --light-y: 25%;
+  --light-radius: 3%;
+
+  background: radial-gradient(circle at var(--light-x) var(--light-y),
+      rgb(0, 110, 255),
+      transparent calc(1 * var(--light-radius))),
+    radial-gradient(circle at var(--light-x) var(--light-y),
+      rgba(0, 247, 255, 0.8),
+      transparent calc(2 * var(--light-radius))),
+    radial-gradient(circle at var(--light-x) var(--light-y),
+      rgba(255, 255, 255, 0.6),
+      transparent calc(3 * var(--light-radius))),
+    radial-gradient(circle at var(--light-x) var(--light-y),
+      rgba(255, 255, 255, 0.4),
+      transparent calc(4 * var(--light-radius))),
+    radial-gradient(circle at var(--light-x) var(--light-y),
+      rgba(255, 255, 255, 0.2),
+      transparent calc(5 * var(--light-radius)));
+  border-radius: inherit;
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+/* Electrons */
+/*************/
+
+/* Electrons - Container */
+.loader-orbits {
+  --color-line: #fff;
+  --color-glow: #0ff;
+  --electron-nb: 3;
+  --radius: 500%;
+
+  border-radius: var(--radius);
+  filter: drop-shadow(0 0 0.3rem var(--color-glow));
+  height: var(--radius);
+  left: calc(50% - var(--radius) / 2);
+  position: absolute;
+  top: calc(50% - var(--radius) / 2);
+  width: var(--radius);
+}
+
+/* Electrons - Base */
+.loader-orbits__electron {
+  --clip-radius: 20%;
+  --radius: 100%;
+  --ratio: 4;
+
+  border-radius: var(--radius);
+  height: calc(var(--radius) / var(--ratio));
+  left: calc(50% - var(--radius) / 2);
+  position: absolute;
+  top: calc(50% - var(--radius) / (var(--ratio) * 2));
+  transform: rotateZ(calc(var(--index) * 180deg / var(--electron-nb)));
+  width: var(--radius);
+  z-index: 100;
+}
+
+/* Electrons - Light */
+.loader-orbits__electron::before,
+.loader-orbits__electron::after {
+  border-radius: inherit;
+  box-shadow: inset 0 var(--offset-direction) 0 0.02rem var(--color-line);
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.loader-orbits__electron::before {
+  --offset-direction: 0.1rem;
+}
+
+.loader-orbits__electron::after {
+  --offset-direction: -0.1rem;
+}
+
+/* Electrons - Mapping */
+.loader-orbits__electron:nth-child(1) {
+  --index: 0;
+}
+
+.loader-orbits__electron:nth-child(2) {
+  --index: 1;
+}
+
+.loader-orbits__electron:nth-child(3) {
+  --index: 2;
+}
+
+/****************/
+/* Interactions */
+/****************/
+
+/* Atom */
+.loader {
+  animation-name: floatAtom;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+/* Electrons */
+.loader-orbits__electron {
+  animation-name: orbitElectron;
+  animation-delay: calc((var(--index) + 1) * 0.5s / var(--electron-nb));
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes floatAtom {
+  0% {
+    transform: translateY(calc(-1 * var(--float)));
+  }
+
+  25% {
+    transform: translateY(calc(-2 * var(--float)));
+  }
+
+  50% {
+    transform: translateY(calc(-1 * var(--float)));
+  }
+
+  75% {
+    transform: translateY(calc(0 * var(--float)));
+  }
+
+  100% {
+    transform: translateY(calc(-1 * var(--float)));
+  }
+}
+
+/* Electrons - Makes the electron's light orbit around the center */
+@keyframes orbitElectron {
+  0% {
+    clip-path: ellipse(calc(2 * var(--clip-radius)) var(--clip-radius) at 50% 0);
+  }
+
+  25% {
+    clip-path: ellipse(calc(2 * var(--clip-radius)) var(--clip-radius) at 0 50%);
+  }
+
+  50% {
+    clip-path: ellipse(calc(2 * var(--clip-radius)) var(--clip-radius) at 50% 100%);
+  }
+
+  75% {
+    clip-path: ellipse(calc(2 * var(--clip-radius)) var(--clip-radius) at 100% 50%);
+  }
+
+  100% {
+    clip-path: ellipse(calc(2 * var(--clip-radius)) var(--clip-radius) at 50% 0);
+  }
+}
+
+.lodercontainer {
+  width: 80px;
+  margin-left: 20px;
+}
+
+.loader-orbits {
+  width: 100px;
+  margin-left: 28px;
+}
+
+/* End of the neucius */
+
+/* Intro Section */
+.main {
+  height: 75vh;
+  background-color: #e6e2e22a;
+}
+
+.main .first {
+  width: 37%;
+  height: 100%;
+  padding: 20px;
+  flex-direction: column;
+}
+
+.main .first .search p {
+  color: rgb(20, 196, 20);
+}
+
+.main .first .search h1 {
+  font-size: 2.8rem;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  display: none;
+}
+
+.search-input {
+  background-image: url("https://img.icons8.com/papercut/120/search.png");
+  background-repeat: no-repeat;
+  background-size: 60px;
+  border-radius: 35px;
+  background-position: right 15px center;
+  font-size: 1.3rem;
+  outline: none;
+  border-radius: 50px;
+  padding: 0.75rem 2rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.5s ease;
+}
+
+.path {
+  height: 20%;
+}
+
+.path span {
+  font-size: 2.5rem;
+  color: aqua;
+}
+
+.path p {
+  font-size: 1.2rem;
+}
+
+.main .secound {
+  width: 37%;
+  height: 100%;
+  padding: 10px;
+}
+
+.main .secound img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Brands */
+.brands {
+  height: 35vh;
+}
+
+/* Course card */
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+.carousel-control-prev {
+  left: -70px;
+}
+
+.carousel-control-next {
+  right: -70px;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.course-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  height: 100%;
+}
+
+.course-card:hover {
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-wrapper {
+  position: relative;
+  height: 220px;
+  width: 400px;
+  overflow: hidden;
+}
+
+.card-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.course-card:hover .card-img-wrapper img {
+  transform: scale(1.1);
+}
+
+.best-seller-badge {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.card-body {
+  padding: 40px;
+}
+
+.rating-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.rating-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rating-number {
+  font-size: 19px;
+  font-weight: 700;
+  color: rgba(117, 25, 25, 0.774);
+}
+
+.stars {
+  color: #ffa500;
+  font-size: 13px;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.course-card {
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  background: #fff;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+}
+
+.card-img-wrapper {
+  position: relative;
+}
+
+.card-img-wrapper img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.best-seller-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ffc107;
+  color: #000;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+
+.rating-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  flex-direction: column;
+}
+
+.rating-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.course-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Buy button */
+button {
+  --green: #1BFD9C;
+  font-size: 15px;
+  padding: 0.7em 2.7em;
+  letter-spacing: 0.06em;
+  position: relative;
+  font-family: inherit;
+  border-radius: 0.6em;
+  overflow: hidden;
+  transition: all 0.3s;
+  line-height: 1.4em;
+  border: 2px solid var(--green);
+  background: linear-gradient(to right, rgba(27, 253, 156, 0.1) 1%, transparent 40%, transparent 60%, rgba(27, 253, 156, 0.1) 100%);
+  color: var(--green);
+  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1);
+}
+
+button:hover {
+  color: #82ffc9;
+  box-shadow: inset 0 0 10px rgba(148, 32, 243, 0.6), 0 0 9px 3px rgba(6, 117, 69, 0.2);
+}
+
+button:before {
+  content: "";
+  position: absolute;
+  left: -4em;
+  width: 4em;
+  height: 100%;
+  top: 0;
+  transition: transform .4s ease-in-out;
+  background: linear-gradient(to right, transparent 1%, rgba(27, 253, 156, 0.1) 40%, rgba(27, 253, 156, 0.1) 60%, transparent 100%);
+}
+
+button:hover:before {
+  transform: translateX(15em);
+}
+
+/* Teachers */
+.mentor-section {
+  padding: 80px 0;
+  text-align: center;
+}
+
+.mentor-title {
+  font-weight: 700;
+  color: #12263a;
+}
+
+.mentor-card {
+  background: transparent;
+  border: none;
+}
+
+.mentor-img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 6px solid white;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+  margin: auto;
+}
+
+.linkedin-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 80px;
+  background: white;
+  border-radius: 5px;
+  padding: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.linkedin-icon img {
+  width: 22px;
+  height: 22px;
+}
+
+.mentor-name {
+  font-weight: 600;
+  margin-top: 20px;
+  font-size: 1.1rem;
+}
+
+.mentor-role {
+  color: gray;
+  font-size: 0.95rem;
+}
+
+/* testimonial */
+.testimonial-section {
+  padding: 80px 0;
+  text-align: center;
+}
+
+.testimonial-card {
+  background: #fff;
+  border: none;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  padding: 30px;
+  transition: all 0.3s ease-in-out;
+  height: 100%;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-8px);
+}
+
+.testimonial-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-text {
+  font-size: 0.95rem;
+  color: #444;
+  min-height: 80px;
+}
+
+.testimonial-name {
+  font-weight: 600;
+  margin-top: 10px;
+  font-size: 1.05rem;
+}
+
+.testimonial-role {
+  font-size: 0.9rem;
+  color: gray;
+  margin-bottom: 10px;
+}
+
+/* Newes */
+.newsletter {
+  background: linear-gradient(120deg, #1737d1, #16c1f4);
+  border-radius: 95% 5% 95% 5% / 20% 83% 17% 80%;
+  padding: 60px 30px;
+  color: white;
+  width: 70vw;
+  height: 45vh;
+}
+
+.newsletter input {
+  border-radius: 50px;
+  padding: 35px 35px;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  width: 100%;
+  font-size: 1.2rem;
+}
+
+.newsletter input::placeholder {
+  color: #aaa;
+}
+
+/* Footer */
+.footer-custom {
+  background-color: #e6f5ff;
+  color: #333;
+  font-family: sans-serif;
+}
+
+.footer-custom h3 {
+  color: #000;
+  font-size: 2rem;
+  position: relative;
+}
+
+.footer-custom h3 .text-primary {
+  color: #7971e9 !important;
+  font-size: 1.5rem;
+  position: absolute;
+  top: -5px;
+  right: -10px;
+}
+
+.footer-custom h5 {
+  color: #000;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.list-unstyled a {
+  color: #6c757d !important;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.list-unstyled a:hover {
+  color: #4f46e5 !important;
+  text-decoration: underline !important;
+}
+
+.contact-info .icon-custom {
+  color: #7971e9;
+  min-width: 20px;
+  font-family: 'Material Symbols Outlined';
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.contact-info p {
+  color: #6c757d;
+  font-size: 0.95rem;
+}
+
+.bottom-footer p,
+.bottom-footer a,
+.bottom-footer span {
+  font-size: 0.85rem;
+  color: #6c757d !important;
+  transition: color 0.3s ease;
+}
+
+.bottom-footer a:hover {
+  color: #4f46e5 !important;
+}
